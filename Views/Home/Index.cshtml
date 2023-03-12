@@ -1,0 +1,47 @@
+﻿@model RolesSiteMVC.Models.Music
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
+</div>
+<div class="align-baseline">
+    @if(Model != null)
+    {
+       <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SongsText)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SongsText)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Source)
+        </dt>
+        <dd class = "col-sm-10">
+            <audio controls> <source src="@Html.DisplayFor(model => model.Source)" />
+                </audio>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Author.Id)
+        </dd>
+    </dl>
+    }
+</div>
+<form method="post" asp-action="SaveBgColor">
+    <input type="color" name="Color"/>
+    <input type="submit" value="Сохранить"/>
+</form>

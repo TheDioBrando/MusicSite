@@ -1,0 +1,62 @@
+﻿@model IEnumerable<RolesSiteMVC.Models.Music>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div style="background-color:@ViewData["bg-color"];">
+<h1>Index</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SongsText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Source)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongsText)
+            </td>
+            <td>
+               <audio controls>
+                   <source src="@Html.DisplayFor(modelItem => item.Source)">
+                   </audio>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.Id)
+            </td>
+            <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>   <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> <span>|</span>
+                    }
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
